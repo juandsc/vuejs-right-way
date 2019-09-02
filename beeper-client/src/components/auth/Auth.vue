@@ -1,8 +1,8 @@
 <template>
   <div id="auth">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-4 col-md-offset-4 authForm">
+      <div class="row">
+        <div class="col-md-4 authForm">
           <h2 class="text-center">Beeper</h2>
           <transition name="fade">
             <router-view></router-view>
@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scope>
 #auth {
   height: 100%;
   display: flex;
@@ -30,5 +30,9 @@ export default {
   padding-bottom: 15px;
   padding-top: 10px;
   border-radius: 10px;
+}
+.row {
+  display: flex;
+  justify-content: center;
 }
 </style>

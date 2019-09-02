@@ -1,9 +1,13 @@
 <template>
   <div>
     <div id="beepsWraper">
-      <beep v-for="beep in beeps" :beep="beep"></beep>
+      <beep
+        v-for="beep in beeps"
+        :key="beep.author.username"
+        :beep="beep"
+      ></beep>
     </div>
-    <div id="beepsLoading" class="text-center">
+    <div id="beepsLoading" class="text-center" v-show="beepsLoading">
       <i class="fa fa-spin fa-spinner"></i>
     </div>
   </div>
@@ -20,17 +24,45 @@ export default {
   created: function() {
     this.beeps = [];
     this.getBeeps();
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed: function() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   data: function() {
     return {
-      beeps: []
+      beeps: [],
+      page: {},
+      beepsLoading: false
     };
   },
   methods: {
-    getBeeps: function() {
-      this.$http.get("/beeps").then(function(res) {
-        this.beeps = res.body.data;
-      });
+    getBeeps: function(page) {
+      this.beepsLoading = true;
+      this.$http
+        .get("/beeps?page=" + page)
+        .then(function(res) {
+          this.beeps = this.beeps.concat(res.body.data);
+          this.page = {
+            current: res.body.current_page,
+            last: res.body.last_page
+          };
+          this.beepsLoading = false;
+        })
+        .catch(function() {
+          this.beepsLoading = false;
+        });
+    },
+    handleScroll: function() {
+      if (
+        document.body.scrollHeight -
+          window.innerHeight -
+          document.body.scrollTop ==
+        0
+      ) {
+        if (this.page.current < this.page.last)
+          this.getBeeps(this.page.current + 1);
+      }
     }
   }
 };

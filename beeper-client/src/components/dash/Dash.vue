@@ -2,9 +2,10 @@
   <div id="dashWrap">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 col-md-offset-1 col-sm-5">
+        <div class="col-md-3 col-md-offset-1 col-sm-5">
           <sidebar></sidebar>
         </div>
+
         <div class="col-md-7 col-sm-7 mainView">
           <transition name="fade">
             <router-view></router-view>
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar.vue";
 
 export default {
   name: "dashboard",

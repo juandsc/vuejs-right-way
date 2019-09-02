@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-sm-6">
         <a href="#" class="btn btn-block btn-default">
-          <i class="fa fa-user"></i> Perfil
+          <i class="fa fa-user"></i> Profile
         </a>
       </div>
       <div class="col-sm-6">
@@ -19,30 +19,31 @@
       <textarea
         class="form-control"
         rows="10"
-        placeholder="Empieza escribiendo tu beep aquí!"
+        placeholder="Start writing your beep here!"
         maxlength="320"
         v-model="newBeep"
       ></textarea>
-      <p
-        class="text-muted"
-      >{{320 - newBeep.length}} caracter{{320 - newBeep.length == 1 ? '' : 'es'}} restante{{320 - newBeep.length == 1 ? '' : 's'}}</p>
+      <p class="text-muted">
+        {{ 320 - newBeep.length }} character{{
+          320 - newBeep.length == 1 ? "" : "s"
+        }}
+        remaining
+      </p>
       <p class="text-center no-margin">
-        <button class="btn btn-primary">Beep Ahora!</button>
+        <button class="btn btn-primary">Beep Now!</button>
       </p>
     </div>
 
     <div class="row">
       <div class="col-sm-6">
         <p class="text-center no-margin">
-          <a href="#">
-            <i class="fa fa-cog"></i> Configuraciones
-          </a>
+          <a href="#"><i class="fa fa-cog"></i> Settings</a>
         </p>
       </div>
       <div class="col-sm-6">
         <p class="text-center no-margin">
           <a href="#" @click.prevent="logout">
-            <i class="fa fa-power-off"></i> Cerrar Sesión
+            <i class="fa fa-power-off"></i> Logout
           </a>
         </p>
       </div>

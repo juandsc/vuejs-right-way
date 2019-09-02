@@ -1,7 +1,7 @@
 <template>
   <div id="newsfeed">
-    <h2 class="m-t-0 m-b-20">Ultimos Beeps</h2>
-    <beeplist></beeplist>
+    <h2 class="m-t-0 m-b-20">Latest Beeps</h2>
+    <beep-list></beep-list>
   </div>
 </template>
 
@@ -11,10 +11,9 @@ import BeepList from "./BeepList.vue";
 export default {
   name: "newsfeed",
   components: {
-    beeplist: BeepList,
+    beepList: BeepList
   }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

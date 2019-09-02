@@ -2,12 +2,14 @@
   <div class="beep">
     <div class="row">
       <div class="col-xs-2 text-center">
-        <router-link :to="'/profile/'+beep.author.username">
+        <router-link :to="'/profile/' + beep.author.username">
           <img :src="beep.author.avatar" class="img-circle no-margin" />
         </router-link>
       </div>
       <div class="col-xs-12">
-        <router-link :to="'/profile/'+beep.author.username">@{{beep.author.username}}</router-link>
+        <router-link :to="'/profile/' + beep.author.username">
+          @{{ beep.author.username }}
+        </router-link>
         <small class="text-muted">
           said:
           <br />
@@ -15,42 +17,54 @@
         </small>
         <p
           :class="{
-                    small: beep.text.length >= 150,
-                    medium: beep.text.length <150 && beep.text.length > 50,
-                    big: beep.text.length <= 50
-                }"
-        >{{beep.text}}</p>
+            small: beep.text.length >= 150,
+            medium: beep.text.length < 150 && beep.text.length > 50,
+            big: beep.text.length <= 50
+          }"
+        >
+          {{ beep.text }}
+        </p>
       </div>
     </div>
     <div class="beepFooter">
-      <button class="btn" @click="likeBeep" :class="[beep.liked ? 'btn-primary' : ' btn-default']">
-        <i class="fa fa-heart" :class="[beep.liked ? 'fa-heart' : 'fa-heart-o']"></i>
-        {{beep.likes}} like{{beep.likes != 1 ? 's' : ''}}
+      <button
+        class="btn"
+        @click="likeBeep"
+        :class="[beep.liked ? 'btn-primary' : ' btn-default']"
+      >
+        <i
+          class="fa fa-heart"
+          :class="[beep.liked ? 'fa-heart' : 'fa-heart-o']"
+        ></i>
+        {{ beep.likes }} like{{ beep.likes != 1 ? "s" : "" }}
       </button>
       <strong class="pull-right">
         <i class="fa fa-calendar"></i>
-        {{beepDate(beep.created_at)}}
+        {{ beepDate(beep.created_at) }}
         <i class="fa fa-clock-o"></i>
-        {{beepTime(beep.created_at)}}
+        {{ beepTime(beep.created_at) }}
       </strong>
     </div>
   </div>
 </template>
 
-
-
 <script>
+import moment from "moment";
+
 export default {
   name: "beep",
   props: { beep: {} },
   methods: {
-    likeBeep: function() {
+    likeBeep: function() {},
+    beepDate: function(timestamp) {
+      return moment(timestamp * 1000).format("YYYY-MM-DD");
     },
+    beepTime: function(timestamp) {
+      return moment(timestamp * 1000).format("HH:mm");
+    }
   }
 };
 </script>
-
-
 
 <style scoped>
 .beep {

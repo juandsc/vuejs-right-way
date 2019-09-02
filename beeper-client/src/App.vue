@@ -1,10 +1,9 @@
 <template>
-  <transition name="scale">
-    <router-view></router-view>
-  </transition>
+  <div id="app">
+    <transition name="scale">
+        <router-view></router-view>
+    </transition>
+  </div>
 </template>
-
-<script>
-</script>
 
 <style src="./assets/beeper.css"></style>
