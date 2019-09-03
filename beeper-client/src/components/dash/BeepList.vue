@@ -5,6 +5,7 @@
         v-for="beep in beeps"
         :key="beep.author.username"
         :beep="beep"
+        :showUserInfo="showUserInfo"
       ></beep>
     </div>
     <div id="beepsLoading" class="text-center" v-show="beepsLoading">
@@ -29,6 +30,10 @@ export default {
   destroyed: function() {
     window.removeEventListener("scroll", this.handleScroll);
   },
+  props: {
+    endpoint: {type: String, default: "/beeps" },
+    showUserInfo: {type: Boolean, default: true }
+  },
   data: function() {
     return {
       beeps: [],
@@ -40,7 +45,7 @@ export default {
     getBeeps: function(page) {
       this.beepsLoading = true;
       this.$http
-        .get("/beeps?page=" + page)
+        .get(this.endpoint + "?page=" + page)
         .then(function(res) {
           this.beeps = this.beeps.concat(res.body.data);
           this.page = {
